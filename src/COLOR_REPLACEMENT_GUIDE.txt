@@ -1,0 +1,23 @@
+# NEUTRAL PASTEL COLOR REPLACEMENTS
+
+## Light Mode Colors:
+#1E3A8A → #4A5568 (charcoal - main text)
+#3B82F6 → #A8B5C7 (slate - accent)
+#6EE7B7 → #B8C5B8 (sage - soft accent)
+#AECBFA → #CDD7DF (light slate)
+#A7F3D0 → #D4DDD4 (light sage)
+#E5E7EB → #E8EDEF (very light grey)
+#FDFBF7 → #FAF8F5 (cream - background)
+#DBEAFE → #CBD5E1 (light grey text)
+
+## Dark Mode Colors:
+#F1F5F9 → #E2E8F0 (light text)
+#60A5FA → #7A8A9D (dark mode slate)
+#34D399 → #7A8F7A (dark mode sage)
+#1E293B → #252D3D (dark card background)
+#0F172A → #1A1F2E (dark background)
+#334155 → #475569 (dark borders)
+#0F172A (input bg) → #1A1F2E
+
+## Special Cases:
+Contact section deep navy → #5A6B7A (mid grey-blue)
