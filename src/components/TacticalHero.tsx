@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Target, Zap, Shield } from 'lucide-react';
 import bgImageDark from 'figma:asset/56e417b118a23871f1b870fa873fff84b6f0d52b.png';
 import heroPortrait from 'figma:asset/916057e4d784a6f22523da6d03e95bf8726dd99b.png';

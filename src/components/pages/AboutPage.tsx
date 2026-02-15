@@ -56,25 +56,35 @@ export default function AboutPage() {
               </p>
               
               <p>
-                My <span className="code-snippet">\"cheetah-mindset\"</span> drives rapid learning and continuous improvement 
+                My <span className="code-snippet">"cheetah-mindset"</span> drives rapid learning and continuous improvement 
                 in the fast-paced world of software development.
               </p>
             </div>
 
             <div className="mt-8 p-6 bg-[#F5EBD9] dark:bg-[#1A1715] rounded-[24px] border-3 border-[#A47A2D] dark:border-[#A47A2D]">
               <p className="font-mono text-[20px] font-bold text-[#521D07] dark:text-[#E2E8F0] italic">
-                \"Building efficient, scalable backend systems that solve real-world problems.\"
+                "Building efficient, scalable backend systems that solve real-world problems."
               </p>
             </div>
           </div>
-
-          {/* Right: Image Placeholder */}
-          <div className="sticker-card image-placeholder border-4 border-[#A47A2D] dark:border-[#A47A2D] h-[600px]">
-            <div className="text-center z-10">
-              <Code2 className="w-32 h-32 text-[#A47A2D] dark:text-[#A47A2D] opacity-40 mx-auto mb-4" />
-              <p style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[28px] font-black text-[#521D07] dark:text-[#E2E8F0] uppercase opacity-40">
-                Professional Photo
-              </p>
+{/* Right: Lifestyle Image - WIDER & HIGHER */}
+          {/* Changed items-center to items-start + pt-8 to move it UP */}
+          <div className="flex items-start justify-center h-full min-h-[500px] pt-8">
+            
+            <div 
+              className="sticker-card p-0 border-4 border-[#A47A2D] dark:border-[#A47A2D] relative group rotate-3 hover:rotate-0 transition-all duration-500 shadow-2xl"
+              style={{
+                width: '100%',
+                maxWidth: '500px', // <--- CHANGED: Made it wider (was 400px)
+                height: '500px',   // Fixed height
+                backgroundImage: `url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            >
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#521D07]/40 to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
@@ -94,9 +104,14 @@ export default function AboutPage() {
             {techStack.map((tech, index) => (
               <div
                 key={index}
-                className="sticker-card bg-white dark:bg-[#252220] p-8 border-4 border-[#A47A2D] dark:border-[#A47A2D] hover:scale-105 transition-transform"
+                className="sticker-card bg-white dark:bg-[#252220] p-8 border-4 border-[#A47A2D] dark:border-[#A47A2D] hover:scale-105 transition-transform relative overflow-hidden group"
               >
-                <div className="flex items-center gap-6">
+                {/* Watermark Icon */}
+                <div className="absolute -right-6 -bottom-6 w-32 h-32 opacity-5 dark:opacity-10 transition-transform group-hover:scale-110 duration-500 rotate-12 text-[#521D07] dark:text-[#E2E8F0]">
+                  {React.cloneElement(tech.icon as React.ReactElement, { className: "w-full h-full" })}
+                </div>
+
+                <div className="flex items-center gap-6 relative z-10">
                   <div className="icon-placeholder flex-shrink-0">
                     <div className="text-[#521D07] dark:text-[#E2E8F0] opacity-80">
                       {tech.icon}
@@ -128,9 +143,9 @@ export default function AboutPage() {
             {softSkills.map((skill, index) => (
               <div
                 key={index}
-                className="sticker-card bg-[#F5EBD9] dark:bg-[#252220] p-8 center-content border-4 border-[#A47A2D] dark:border-[#A47A2D] hover:scale-105 transition-transform"
+                className="sticker-card bg-[#F5EBD9] dark:bg-[#252220] p-8 center-content border-4 border-[#A47A2D] dark:border-[#A47A2D] hover:scale-105 transition-transform relative overflow-hidden"
               >
-                <div className="w-16 h-16 bg-[#A47A2D] dark:bg-[#A47A2D] rounded-full mb-4 flex items-center justify-center">
+                <div className="w-16 h-16 bg-[#A47A2D] dark:bg-[#A47A2D] rounded-full mb-4 flex items-center justify-center shadow-[4px_4px_0px_rgba(82,29,7,0.2)]">
                   <span className="text-[24px] font-black text-white dark:text-[#1A1715]">✓</span>
                 </div>
                 <p style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[20px] md:text-[24px] font-black text-[#521D07] dark:text-[#E2E8F0] text-center uppercase">

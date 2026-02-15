@@ -1,139 +1,160 @@
-import React from 'react';
-import { BookOpen, Calendar, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
 
-export default function BlogPage() {
-  const blogPosts = [
-    {
-      title: 'My Journey to Top 1%',
-      excerpt: 'How I achieved top rankings in web development through consistent learning, strategic goal-setting, and a growth mindset that embraces challenges.',
-      date: 'Jan 2024',
-      tags: ['CAREER', 'LEARNING', 'MOTIVATION'],
-      readTime: '5 min read',
-    },
-    {
-      title: 'Building with Flutter',
-      excerpt: 'Lessons learned from developing cross-platform mobile applications with Flutter and Dart. Performance optimization, state management, and best practices.',
-      date: 'Dec 2023',
-      tags: ['FLUTTER', 'MOBILE', 'DART'],
-      readTime: '8 min read',
-    },
-    {
-      title: 'Backend Architecture Best Practices',
-      excerpt: 'Exploring scalable backend system design patterns, API optimization strategies, and database performance tuning for production environments.',
-      date: 'Nov 2023',
-      tags: ['BACKEND', 'NODE.JS', 'ARCHITECTURE'],
-      readTime: '10 min read',
-    },
-    {
-      title: 'SEO Optimization Techniques',
-      excerpt: 'A comprehensive guide to modern SEO strategies including technical SEO, content optimization, and performance improvements that boosted client rankings.',
-      date: 'Oct 2023',
-      tags: ['SEO', 'WEB DEV', 'MARKETING'],
-      readTime: '7 min read',
-    },
-  ];
+// Sample data - You can add as many as you want here!
+const ALL_BLOG_POSTS = [
+  {
+    id: 1,
+    date: 'Jan 2024',
+    readTime: '5 min read',
+    title: 'MY JOURNEY TO TOP 1%',
+    excerpt: 'How I achieved top rankings in web development through consistent learning, strategic goal-setting, and a growth mindset.',
+    tags: ['CAREER', 'LEARNING', 'MOTIVATION']
+  },
+  {
+    id: 2,
+    date: 'Dec 2023',
+    readTime: '8 min read',
+    title: 'BUILDING WITH FLUTTER',
+    excerpt: 'Lessons learned from developing cross-platform mobile applications. Performance optimization, state management, and best practices.',
+    tags: ['FLUTTER', 'MOBILE', 'DART']
+  },
+  {
+    id: 3,
+    date: 'Nov 2023',
+    readTime: '10 min read',
+    title: 'BACKEND ARCHITECTURE',
+    excerpt: 'Exploring scalable backend system design patterns, API optimization strategies, and database performance tuning.',
+    tags: ['BACKEND', 'NODE.JS', 'ARCHITECTURE']
+  },
+  {
+    id: 4,
+    date: 'Oct 2023',
+    readTime: '7 min read',
+    title: 'SEO OPTIMIZATION',
+    excerpt: 'A comprehensive guide to modern SEO strategies including technical SEO and performance improvements.',
+    tags: ['SEO', 'WEB DEV', 'MARKETING']
+  },
+  {
+    id: 5,
+    date: 'Sep 2023',
+    readTime: '6 min read',
+    title: 'THE ART OF UI DESIGN',
+    excerpt: 'Understanding color theory, typography, and spacing to create visually stunning and user-friendly interfaces.',
+    tags: ['DESIGN', 'UI/UX', 'CREATIVE']
+  },
+  {
+    id: 6,
+    date: 'Aug 2023',
+    readTime: '12 min read',
+    title: 'TYPESCRIPT MASTERY',
+    excerpt: 'Deep dive into advanced TypeScript features, generics, and utility types for safer codebases.',
+    tags: ['TYPESCRIPT', 'CODING', 'GUIDE']
+  }
+];
+
+export default function BlogSection() {
+  const [currentPage, setCurrentPage] = useState(0);
+  const postsPerPage = 4;
+
+  // Calculate which posts to show
+  const indexOfLastPost = (currentPage + 1) * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = ALL_BLOG_POSTS.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Handlers
+  const totalPages = Math.ceil(ALL_BLOG_POSTS.length / postsPerPage);
+  
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
 
   return (
-    <section className="min-h-screen py-32 bg-[#FDF5E7] dark:bg-[#1A1715] relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <section className="py-20 bg-[#FDF5E7] dark:bg-[#1A1715]">
+      <div className="max-w-7xl mx-auto px-6">
+        
         {/* Header */}
-        <div className="text-center mb-20">
-          <div className="inline-block px-8 md:px-10 py-3 md:py-4 bg-[#A47A2D] dark:bg-[#A47A2D] rounded-full mb-8">
-            <p className="font-mono text-[20px] md:text-[24px] font-bold text-white dark:text-[#1A1715] uppercase tracking-wider">
-              // Technical Writing
-            </p>
-          </div>
-          <h1 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[56px] sm:text-6xl lg:text-7xl leading-tight font-black text-[#521D07] dark:text-[#E2E8F0] uppercase mb-8">
-            Blog & Insights
-          </h1>
-          <p className="text-[24px] md:text-[28px] font-bold text-[#521D07] dark:text-[#B8B0A6] max-w-3xl mx-auto px-4">
-            Thoughts on development, learning, and building scalable systems
+        <div className="text-center mb-16">
+          <h2 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[40px] md:text-[56px] font-black text-[#521D07] dark:text-[#E2E8F0] uppercase mb-4">
+            Latest Thoughts
+          </h2>
+          <p className="font-mono text-[18px] text-[#A47A2D] dark:text-[#B8B0A6]">
+            // INSIGHTS & LEARNINGS
           </p>
         </div>
 
-        {/* Blog Posts Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-          {blogPosts.map((post, index) => (
-            <div
-              key={index}
-              className="sticker-card bg-white dark:bg-[#252220] p-10 border-4 border-[#A47A2D] dark:border-[#A47A2D] hover:scale-105 transition-transform cursor-pointer"
+        {/* Blog Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 min-h-[600px]">
+          {currentPosts.map((post) => (
+            <div 
+              key={post.id}
+              className="sticker-card bg-white dark:bg-[#252220] p-8 border-4 border-[#A47A2D] dark:border-[#A47A2D] flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300 animate-in fade-in slide-in-from-bottom-4"
             >
-              {/* Post Meta */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-[#A47A2D] dark:text-[#A47A2D]" />
-                  <span className="font-mono text-[16px] font-bold text-[#521D07] dark:text-[#B8B0A6]">
-                    {post.date}
-                  </span>
+              <div>
+                <div className="flex items-center gap-2 mb-4 font-mono text-sm text-[#A47A2D] dark:text-[#B8B0A6]">
+                  <span>📅 {post.date}</span>
+                  <span>•</span>
+                  <span>☕ {post.readTime}</span>
                 </div>
-                <span className="text-[16px] font-bold text-[#521D07] dark:text-[#B8B0A6]">•</span>
-                <div className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-[#A47A2D] dark:text-[#A47A2D]" />
-                  <span className="font-mono text-[16px] font-bold text-[#521D07] dark:text-[#B8B0A6]">
-                    {post.readTime}
-                  </span>
-                </div>
+                
+                <h3 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[28px] leading-tight font-black text-[#521D07] dark:text-[#E2E8F0] uppercase mb-4">
+                  {post.title}
+                </h3>
+                
+                <p className="text-[18px] font-bold text-[#521D07]/80 dark:text-[#B8B0A6] mb-6 line-clamp-3">
+                  {post.excerpt}
+                </p>
               </div>
 
-              {/* Post Title */}
-              <h3 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[32px] md:text-[40px] font-black text-[#521D07] dark:text-[#E2E8F0] uppercase mb-4">
-                {post.title}
-              </h3>
+              <div>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {post.tags.map(tag => (
+                    <span key={tag} className="px-3 py-1 bg-[#F5EBD9] dark:bg-[#1A1715] border-2 border-[#A47A2D] dark:border-[#A47A2D] rounded-lg text-xs font-black text-[#521D07] dark:text-[#E2E8F0]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-              {/* Post Excerpt */}
-              <p className="text-[20px] md:text-[24px] font-bold text-[#521D07] dark:text-[#B8B0A6] mb-6 leading-relaxed">
-                {post.excerpt}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-3 mb-6">
-                {post.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="mono-tag"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <a href="#" className="inline-flex items-center gap-2 text-[#A47A2D] font-black hover:gap-4 transition-all">
+                  Read Article →
+                </a>
               </div>
-
-              {/* Read More Link */}
-              <button className="flex items-center gap-2 text-[20px] font-black text-[#A47A2D] dark:text-[#A47A2D] hover:text-[#FFA51F] dark:hover:text-[#FFA51F] transition-colors group">
-                Read Article
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-              </button>
             </div>
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="sticker-card bg-[#A47A2D] dark:bg-[#A47A2D] p-12 text-center border-4 border-[#521D07] dark:border-[#E2E8F0]">
-          <h3 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[48px] font-black text-white dark:text-[#1A1715] uppercase mb-6">
-            Want More Content?
-          </h3>
-          <p className="text-[24px] font-bold text-white dark:text-[#1A1715] mb-8 max-w-2xl mx-auto">
-            Follow me on LinkedIn and Medium for more technical articles, 
-            development insights, and career growth tips.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pill-button px-12 py-6 bg-[#521D07] dark:bg-[#521D07] text-white text-[24px] inline-flex items-center gap-3 hover:bg-[#FFA51F] dark:hover:bg-[#FFA51F] transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://medium.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pill-button px-12 py-6 bg-[#521D07] dark:bg-[#521D07] text-white text-[24px] inline-flex items-center gap-3 hover:bg-[#FFA51F] dark:hover:bg-[#FFA51F] transition-colors"
-            >
-              Medium
-            </a>
-          </div>
+        {/* Navigation Buttons */}
+        <div className="flex justify-center items-center gap-8">
+          <button 
+            onClick={handlePrev}
+            disabled={currentPage === 0}
+            className={`pill-button px-8 py-3 bg-[#521D07] dark:bg-[#521D07] text-white text-[18px] 
+              ${currentPage === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#FFA51F] hover:scale-105'}`}
+          >
+            ← Previous
+          </button>
+          
+          <span className="font-mono text-[18px] font-bold text-[#521D07] dark:text-[#E2E8F0]">
+            Page {currentPage + 1} of {totalPages}
+          </span>
+
+          <button 
+            onClick={handleNext}
+            disabled={currentPage === totalPages - 1}
+            className={`pill-button px-8 py-3 bg-[#521D07] dark:bg-[#521D07] text-white text-[18px]
+              ${currentPage === totalPages - 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#FFA51F] hover:scale-105'}`}
+          >
+            Next →
+          </button>
         </div>
+
       </div>
     </section>
   );

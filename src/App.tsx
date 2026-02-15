@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, useScroll, useSpring, useMotionValueEvent } from 'motion/react';
+import { motion } from 'framer-motion';
 import HomePage from './components/pages/HomePage';
 import AboutPage from './components/pages/AboutPage';
 import ProjectsPage from './components/pages/ProjectsPage';
@@ -11,32 +11,33 @@ import ThemeToggle from './components/ThemeToggle';
 import CustomCursor from './components/CustomCursor';
 import MagneticButton from './components/MagneticButton';
 import ScrollVelocityText from './components/ScrollVelocityText';
-import logoImage from 'figma:asset/f8e0d4fdfa99f0810ed0358a13ee96e447e08bcc.png';
+import Scene3D from './components/Scene3D';
+import ScrollProgress from './components/ScrollProgress';
 
 export default function App() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  const { scrollY, scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    setScrolled(latest > 50);
-  });
+  const [scrollYValue, setScrollYValue] = useState(0);
+  const [scrollYProgressValue, setScrollYProgressValue] = useState(0);
 
   useEffect(() => {
     // Smooth scroll setup
     document.documentElement.style.scrollBehavior = 'smooth';
 
     const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setScrollYValue(scrollY);
+      setScrolled(scrollY > 50);
+
+      // Calculate scroll progress
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+      setScrollYProgressValue(progress);
       
       // Detect active section based on scroll position
       const sections = ['home', 'about', 'projects', 'resume', 'blog', 'contact'];
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const scrollPosition = scrollY + window.innerHeight / 2;
       
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -76,6 +77,9 @@ export default function App() {
 
   return (
     <div className="relative bg-[#FDF5E7] dark:bg-[#1A1715]">
+      {/* 3D Bouncing Sphere */}
+      <Scene3D scrollY={scrollYValue} scrollYProgress={scrollYProgressValue} />
+
       {/* Custom Cursor */}
       <CustomCursor />
 
@@ -85,25 +89,19 @@ export default function App() {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#FDF5E7]/95 dark:bg-[#1A1715]/95 backdrop-blur-sm shadow-lg border-b-4 border-[#A47A2D] py-2'
+            ? 'bg-[#FDF5E7]/95 dark:bg-[#1A1715]/95 backdrop-blur-sm shadow-lg border-b-4 border-[#A47A2D] py-4'
             : 'bg-[#FDF5E7]/80 dark:bg-[#1A1715]/80 backdrop-blur-sm border-b-4 border-[#A47A2D] py-4'
         }`}
       >
-        {/* Scroll Progress Bar */}
-        <motion.div className="absolute bottom-0 left-0 right-0 h-[4px] bg-[#A47A2D] origin-left" style={{ scaleX }} />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between">
             {/* Logo with Magnetic Effect */}
             <MagneticButton
               onClick={() => scrollToSection('home')}
-              className="flex items-center transition-transform hover:scale-105 bg-transparent border-none"
+              className="flex items-center transition-transform hover:scale-105 bg-transparent border-none text-[18px] md:text-[24px] font-black"
+              style={{ fontFamily: 'Michroma, sans-serif' }}
             >
-              <img 
-                src={logoImage} 
-                alt="Josh Logo" 
-                className="h-14 w-14 sm:h-16 sm:w-16 md:h-20 md:w-20"
-              />
+              <span className="text-[#A47A2D]">JA</span>
             </MagneticButton>
 
             {/* Desktop Navigation with Magnetic Buttons */}
@@ -183,7 +181,7 @@ export default function App() {
       {/* 1. HERO SECTION */}
       <section 
         id="home" 
-        className="relative w-full min-h-screen py-20 bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen py-20 bg-transparent"
       >
         <HomePage />
       </section>
@@ -191,7 +189,7 @@ export default function App() {
       {/* 2. ABOUT SECTION */}
       <section 
         id="about" 
-        className="relative w-full min-h-screen py-20 bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen py-20 bg-transparent"
       >
         <AboutPage />
       </section>
@@ -202,7 +200,7 @@ export default function App() {
       {/* 3. PROJECTS SECTION */}
       <section 
         id="projects" 
-        className="relative w-full min-h-screen py-20 bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen py-20 bg-transparent"
       >
         <ProjectsPage />
       </section>
@@ -210,7 +208,7 @@ export default function App() {
       {/* 4. RESUME SECTION */}
       <section 
         id="resume" 
-        className="relative w-full min-h-screen bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen bg-transparent"
       >
         <ResumePage />
       </section>
@@ -218,7 +216,7 @@ export default function App() {
       {/* 5. BLOG SECTION */}
       <section 
         id="blog" 
-        className="relative w-full min-h-screen py-20 bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen py-20 bg-transparent"
       >
         <BlogPage />
       </section>
@@ -226,10 +224,13 @@ export default function App() {
       {/* 6. CONTACT SECTION */}
       <section 
         id="contact" 
-        className="relative w-full min-h-screen py-20 bg-[#FDF5E7] dark:bg-[#1A1715]"
+        className="relative w-full min-h-screen py-20 bg-transparent"
       >
         <ContactPage />
       </section>
+
+      {/* Global Scroll Progress Bar */}
+      <ScrollProgress />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Download, Briefcase, GraduationCap, Award, ChevronDown } from 'lucide-react';
 
 export function Resume() {

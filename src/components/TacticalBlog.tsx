@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Radio, Calendar, Clock, ArrowRight } from 'lucide-react';
 
 interface TacticalBlogProps {

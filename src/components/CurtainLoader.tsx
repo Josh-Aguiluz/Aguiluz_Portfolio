@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import logoImage from 'figma:asset/f8e0d4fdfa99f0810ed0358a13ee96e447e08bcc.png';
 
 export default function CurtainLoader() {

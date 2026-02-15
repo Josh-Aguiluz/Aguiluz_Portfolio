@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Menu, X, Crosshair, Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavigationProps {
   activeSection: string;

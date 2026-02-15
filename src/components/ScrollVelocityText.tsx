@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform, useVelocity } from 'motion/react';
+import { motion, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 
 interface ScrollVelocityTextProps {
   text: string;

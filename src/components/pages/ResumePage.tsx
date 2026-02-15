@@ -1,6 +1,6 @@
 import React from 'react';
 import { Award, Briefcase, GraduationCap, Star, Download } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import SpotlightCard from '../SpotlightCard';
 import MagneticButton from '../MagneticButton';
 import InfiniteMarquee from '../InfiniteMarquee';

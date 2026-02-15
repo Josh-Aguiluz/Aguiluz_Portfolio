@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Mail, MapPin, Github, Linkedin, Twitter, Send } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 

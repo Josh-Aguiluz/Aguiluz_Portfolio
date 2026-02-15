@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Code, Database, Palette, Cpu, Globe, Smartphone, MessageSquare, Lightbulb, Award, TrendingUp, Users, Zap } from 'lucide-react';
 
 interface TacticalAboutProps {
@@ -28,9 +28,7 @@ export function TacticalAbout({ theme }: TacticalAboutProps) {
   ];
 
   return (
-    <section id="about" className={`min-h-screen py-12 md:py-20 relative overflow-hidden transition-colors duration-500 ${
-      isDark ? 'bg-black' : 'bg-white'
-    }`}>
+    <section id="about" className="min-h-screen py-12 md:py-20 relative overflow-hidden transition-colors duration-500 bg-transparent">
       {/* Background elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{

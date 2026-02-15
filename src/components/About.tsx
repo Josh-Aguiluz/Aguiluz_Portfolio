@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Code2, Database, Palette, Lightbulb, Users, Zap, Server, Smartphone } from 'lucide-react';
 
 export function About() {

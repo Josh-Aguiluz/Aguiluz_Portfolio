@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Download, GraduationCap, Briefcase, Award, ChevronDown, FileText } from 'lucide-react';
 
 interface TacticalResumeProps {
