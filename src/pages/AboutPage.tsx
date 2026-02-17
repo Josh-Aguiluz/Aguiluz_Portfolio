@@ -107,7 +107,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {techStack.map((tech, index) => (
               <div
                 key={index}
@@ -124,11 +124,11 @@ export default function AboutPage() {
                       {tech.icon}
                     </div>
                   </div>
-                  <div>
-                    <h4 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[24px] md:text-[32px] font-black text-[#521D07] dark:text-[#E2E8F0] uppercase">
+                  <div className="min-w-0 flex-1">
+                    <h4 style={{ fontFamily: 'Michroma, sans-serif' }} className="text-[24px] md:text-[32px] font-black text-[#521D07] dark:text-[#E2E8F0] uppercase truncate">
                       {tech.name}
                     </h4>
-                    <p className="font-mono text-[14px] md:text-[16px] font-bold text-[#521D07] dark:text-[#B8B0A6] uppercase">
+                    <p className="font-mono text-[14px] md:text-[16px] font-bold text-[#521D07] dark:text-[#B8B0A6] uppercase truncate">
                       {tech.category}
                     </p>
                   </div>
