@@ -45,40 +45,40 @@ function ScrollingSphere({ scrollY, scrollYProgress }: Scene3DProps) {
     let targetScale = 2.2;
 
     if (scrollYProgress < 0.05) {
-       // 0% (Top) -> 5% (Down-Left)
-       const t = scrollYProgress / 0.05;
-       targetX = THREE.MathUtils.lerp(3.5, -3.5, t);
-       targetY = THREE.MathUtils.lerp(2.0, 0, t);
-       targetScale = 2.2;
+      // 0% (Top) -> 5% (Down-Left)
+      const t = scrollYProgress / 0.05;
+      targetX = THREE.MathUtils.lerp(3.5, -3.5, t);
+      targetY = THREE.MathUtils.lerp(2.0, 0, t);
+      targetScale = 2.2;
     } else if (scrollYProgress < 0.12) {
-       // 5% -> 12% (Down-Right)
-       const t = (scrollYProgress - 0.05) / 0.07;
-       targetX = THREE.MathUtils.lerp(-3.5, 3.5, t);
-       targetY = THREE.MathUtils.lerp(0, -1.5, t);
-       targetScale = 2.2;
+      // 5% -> 12% (Down-Right)
+      const t = (scrollYProgress - 0.05) / 0.07;
+      targetX = THREE.MathUtils.lerp(-3.5, 3.5, t);
+      targetY = THREE.MathUtils.lerp(0, -1.5, t);
+      targetScale = 2.2;
     } else if (scrollYProgress < 0.30) {
-       // 12% -> 30% (Transition to About: Left)
-       const t = (scrollYProgress - 0.12) / 0.18;
-       targetX = THREE.MathUtils.lerp(3.5, -2.5, t);
-       targetY = THREE.MathUtils.lerp(-1.5, 0.5, t);
-       targetScale = THREE.MathUtils.lerp(2.2, 2.0, t);
+      // 12% -> 30% (Transition to About: Left)
+      const t = (scrollYProgress - 0.12) / 0.18;
+      targetX = THREE.MathUtils.lerp(3.5, -2.5, t);
+      targetY = THREE.MathUtils.lerp(-1.5, 0.5, t);
+      targetScale = THREE.MathUtils.lerp(2.2, 2.0, t);
     } else if (scrollYProgress < 0.60) {
-       // About (30%) -> Projects (60%)
-       const t = (scrollYProgress - 0.30) / 0.30;
-       targetX = THREE.MathUtils.lerp(-2.5, 2.5, t);
-       targetY = 0.5;
-       targetScale = THREE.MathUtils.lerp(2.0, 1.8, t);
+      // About (30%) -> Projects (60%)
+      const t = (scrollYProgress - 0.30) / 0.30;
+      targetX = THREE.MathUtils.lerp(-2.5, 2.5, t);
+      targetY = 0.5;
+      targetScale = THREE.MathUtils.lerp(2.0, 1.8, t);
     } else if (scrollYProgress < 0.90) {
-       // Projects (60%) -> Contact (90%)
-       const t = (scrollYProgress - 0.60) / 0.30;
-       targetX = THREE.MathUtils.lerp(2.5, 0, t);
-       targetY = 0.5;
-       targetScale = THREE.MathUtils.lerp(1.8, 2.2, t);
+      // Projects (60%) -> Contact (90%)
+      const t = (scrollYProgress - 0.60) / 0.30;
+      targetX = THREE.MathUtils.lerp(2.5, 0, t);
+      targetY = 0.5;
+      targetScale = THREE.MathUtils.lerp(1.8, 2.2, t);
     } else {
-       // Contact (90%+)
-       targetX = 0;
-       targetY = 0.5;
-       targetScale = 2.2;
+      // Contact (90%+)
+      targetX = 0;
+      targetY = 0.5;
+      targetScale = 2.2;
     }
 
     // Wind/Inertia Effect
@@ -88,7 +88,7 @@ function ScrollingSphere({ scrollY, scrollYProgress }: Scene3DProps) {
     // Apply Transformations
     meshRef.current.position.x = THREE.MathUtils.lerp(meshRef.current.position.x, targetX, 0.1);
     meshRef.current.position.y = THREE.MathUtils.lerp(meshRef.current.position.y, targetY, 0.1);
-    
+
     const currentScale = meshRef.current.scale.x;
     const nextScale = THREE.MathUtils.lerp(currentScale, targetScale, 0.1);
     meshRef.current.scale.set(nextScale, nextScale, nextScale);
@@ -101,7 +101,7 @@ function ScrollingSphere({ scrollY, scrollYProgress }: Scene3DProps) {
   return (
     <>
       <pointLight ref={lightRef} position={[0, 0, 5]} intensity={2} color="#FDB931" distance={10} decay={2} />
-      
+
       <Float speed={4} rotationIntensity={2} floatIntensity={2}>
         <Icosahedron ref={meshRef} args={[1, 0]} position={[3.5, 2.0, 0]}>
           <meshStandardMaterial
